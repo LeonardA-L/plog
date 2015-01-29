@@ -1,4 +1,4 @@
-
+a
 # The Djangae Scaffold Project
 
 This is a barebones Django project configured for use on App Engine using [Djangae](https://github.com/potatolondon/djangae)
