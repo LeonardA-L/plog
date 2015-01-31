@@ -3,6 +3,7 @@ from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader
+from django.utils.dateparse import parse_date
 
 from blog.models import Article
 
@@ -29,7 +30,7 @@ def admin(request):
     return render(request, 'blog/admin.html', context)
 
 def addPost(request):
-	return render(request, 'blog/editPost.html', {})
+	return render(request, 'blog/editPost.html', {'date':datetime.today()})
 
 def editPost(request, article_id):
 	try:
@@ -48,7 +49,8 @@ def savePost(request):
     	p.title=request.POST['title']
     	p.content=request.POST['content']
     	p.draft=draft
+    	p.date = parse_date(request.POST['date'])
     else:
-    	p = Article(title=request.POST['title'], content=request.POST['content'], draft=draft)
+    	p = Article(title=request.POST['title'], content=request.POST['content'], draft=draft, date = parse_date(request.POST['date']))
     p.save()
     return HttpResponseRedirect(reverse('blog:admin'))
