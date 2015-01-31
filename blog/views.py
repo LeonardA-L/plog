@@ -18,3 +18,9 @@ def detail(request, article_id):
         raise Http404("Oh noes, your princess is in an other castle.")
     context = {'article': article}
     return render(request, 'blog/detail.html', context)
+
+def admin(request):
+    latest_blog_posts = Article.objects.all()	# Do not display posts that are to be published later
+    latest_blog_posts = latest_blog_posts.order_by('-date')[:10]
+    context = {'latest_blog_posts': latest_blog_posts}
+    return render(request, 'blog/admin.html', context)
