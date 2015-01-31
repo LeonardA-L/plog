@@ -15,6 +15,12 @@ indexes:
   - name: __key__
     direction: desc
 
+- kind: blog_article
+  properties:
+  - name: draft
+  - name: date
+    direction: desc
+
 - kind: blog_choice
   properties:
   - name: __key__
