@@ -1,11 +1,12 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 
 class Article(models.Model):
     title = models.CharField(max_length=250)
     content = models.TextField()
-    date = models.DateTimeField('date published')
+    date = models.DateField(default=datetime.now)
     draft = models.BooleanField()
     def __str__(self):              # __unicode__ on Python 2
         return self.title
