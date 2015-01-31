@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from datetime import datetime
 from django.http import Http404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -31,8 +31,24 @@ def admin(request):
 def addPost(request):
 	return render(request, 'blog/editPost.html', {})
 
+def editPost(request, article_id):
+	try:
+		article = Article.objects.get(pk=article_id)
+	except Article.DoesNotExist:
+		raise Http404("Arr, cap'n, that booty be nowhere.")
+	context = {'article': article}
+	return render(request, 'blog/editPost.html', context)
+
 def savePost(request):
     #request.POST['choice']
-    p = Article(title=request.POST['title'], content=request.POST['content'], draft=True if request.POST['draft']=="checked" else False)
+    draft= True if (request.POST.get('draft', False)=="checked") else False
+    article_id = request.POST.get('article_id', False)
+    if article_id:
+    	p = get_object_or_404(Article, pk=article_id)
+    	p.title=request.POST['title']
+    	p.content=request.POST['content']
+    	p.draft=draft
+    else:
+    	p = Article(title=request.POST['title'], content=request.POST['content'], draft=draft)
     p.save()
     return HttpResponseRedirect(reverse('blog:admin'))
