@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'djangosecure',
     'csp',
+    'blog',
     'djangae.contrib.gauth',
     'djangae', # Djangae should be after Django core/contrib things
 )
@@ -46,14 +47,14 @@ MIDDLEWARE_CLASSES = (
     'djangae.contrib.security.middleware.AppEngineSecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'djangae.contrib.gauth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'csp.middleware.CSPMiddleware',
-    'session_csrf.CsrfMiddleware',
     'djangosecure.middleware.SecurityMiddleware',
 )
-
+"""
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -62,9 +63,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    "session_csrf.context_processor"
+    "session_csrf.context_processor",
 )
-
+"""
 def check_session_csrf_enabled():
     if "session_csrf.CsrfMiddleware" not in MIDDLEWARE_CLASSES:
         return [ "SESSION_CSRF_DISABLED"]
@@ -81,7 +82,7 @@ SECURE_CHECKS = [
     "djangosecure.check.djangosecure.check_ssl_redirect",
     "scaffold.settings.check_session_csrf_enabled"
 ]
-
+ 
 ROOT_URLCONF = 'scaffold.urls'
 
 WSGI_APPLICATION = 'scaffold.wsgi.application'
@@ -106,9 +107,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
 if DEBUG:
     CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
-
 
 from djangae.contrib.gauth.settings import *
