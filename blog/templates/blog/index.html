@@ -3,7 +3,8 @@
     <ul>
     {% for post in latest_blog_posts %}
         <h3>{{post.title}}</h3>
-        <p>{{post.content}}</p>
+        <p>{{post.content|truncatechars:200}}</p>
+        <a href="">I want moar</a>
     {% endfor %}
     </ul>
 {% else %}
