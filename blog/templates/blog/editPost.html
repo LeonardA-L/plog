@@ -1,0 +1,12 @@
+<h1>Add a post</h1>
+
+<form action="{% url 'blog:savePost' %}" method="post">
+{% csrf_token %}
+Title : <input type="text" name="title" /><br />
+Content :<br />
+<textarea name="content">
+
+</textarea>
+Draft : <input type="checkbox" name="draft" />
+<br /><input type="submit" value="Save Entry" />
+</form>
