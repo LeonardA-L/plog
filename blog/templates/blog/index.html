@@ -1,1 +1,11 @@
 <h1>Hey, it works!</h1>
+{% if latest_blog_posts %}
+    <ul>
+    {% for post in latest_blog_posts %}
+        <h3>{{post.title}}</h3>
+        <p>{{post.content}}</p>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No articles at the moment.</p>
+{% endif %}
