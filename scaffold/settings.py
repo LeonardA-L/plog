@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'blog',
     'djangae.contrib.gauth',
     'djangae', # Djangae should be after Django core/contrib things
+    'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,3 +112,11 @@ if DEBUG:
     CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
 
 from djangae.contrib.gauth.settings import *
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

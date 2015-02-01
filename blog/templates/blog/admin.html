@@ -8,9 +8,9 @@
     		<td>Actions</td>
     	</tr>
     	{% for post in latest_blog_posts %}<tr>
-    		<td><a href="{% url 'blog:editPost' post.id %}">{{post.title}}</td>
+    		<td><a href="{% url 'blog:editPost' post.id %}">{{post.title}}</a></td>
     		<td>{{post.date}}</td>
-    		<td>None</td>
+    		<td><a href="{% url 'blog:editPost' post.id %}">Edit</a> | Delete</td>
    		</tr>{% endfor %}
     </table>
 {% else %}
