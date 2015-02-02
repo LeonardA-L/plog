@@ -5,9 +5,9 @@ from django.views.decorators.csrf import csrf_exempt
 
 from blog.models import Article
 from blog.apimodels import ArticleSerializer
+from blog.tools import *
 
 @api_view(['GET', 'POST'])
-@csrf_exempt
 def article_detail(request, id, format=None):
     """
     Retrieve or delete an article
@@ -24,3 +24,8 @@ def article_detail(request, id, format=None):
     elif request.method == 'POST':
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+"""
+@api_view(['GET'])
+def articles(request):
+"""

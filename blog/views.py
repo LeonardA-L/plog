@@ -7,11 +7,10 @@ from django.utils.dateparse import parse_date
 
 
 from blog.models import Article
+from blog.tools import *
 
 def index(request):
-    latest_blog_posts = Article.objects.filter(date__lte = datetime.today())	# Do not display posts that are to be published later
-    latest_blog_posts = latest_blog_posts.filter(draft = False)
-    latest_blog_posts = latest_blog_posts.order_by('-date')[:10]
+    latest_blog_posts = retrieveArticles(limit=10, drafts=False, future=False) 
     context = {'latest_blog_posts': latest_blog_posts}
     return render(request, 'blog/index.html', context)
 
@@ -26,7 +25,8 @@ def detail(request, article_id):
 ## Admin stuff -- This should probably be somewhere else
 
 def admin(request):
-    latest_blog_posts = Article.objects.all().order_by('-date')
+    #latest_blog_posts = Article.objects.all().order_by('-date')
+    latest_blog_posts = retrieveArticles(limit=-1, drafts=True, future=True)
     context = {'latest_blog_posts': latest_blog_posts}
     return render(request, 'blog/admin.html', context)
 
