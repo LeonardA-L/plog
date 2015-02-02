@@ -1,3 +1,10 @@
 <h1>{{article.title}}</h1>
 <p>Published on {{article.date}}</p>
 <p>{{article.content}}</p>
+
+<h2>Comments</h2>
+{% for c in comments %}
+        <h3>{{c.author}}</h3>
+        <p>{{c.message}}
+        </p>
+{% endfor %}

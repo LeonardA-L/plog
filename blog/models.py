@@ -10,3 +10,11 @@ class Article(models.Model):
     draft = models.BooleanField()
     def __str__(self):              # __unicode__ on Python 2
         return self.title
+
+class Comment(models.Model):
+	post = models.ForeignKey(Article)
+	author = models.CharField(max_length=250)
+	quest = models.CharField(max_length=250)
+	date = models.DateField(default=datetime.now)
+	color = models.CharField(max_length=8)
+	message = models.TextField()
