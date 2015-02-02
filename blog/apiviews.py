@@ -3,10 +3,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseForbidden
+import sys
 
 from blog.models import *
 from blog.apimodels import ArticleSerializer, CommentSerializer
 from blog.tools import *
+
 
 @api_view(['GET', 'POST'])
 def article_detail(request, id, format=None):
@@ -21,11 +24,8 @@ def article_detail(request, id, format=None):
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
     elif request.method == 'POST':
-        if request.user.is_superuser:
-            article.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        else:
-            return HttpResponseForbidden()
+        article.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
 def addComment(request, format=None):
