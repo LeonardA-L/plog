@@ -46,7 +46,7 @@ def admin(request):
     if request.user.is_superuser:
         #latest_blog_posts = Article.objects.all().order_by('-date')
         latest_blog_posts = retrieveArticles(limit=-1, drafts=True, future=True)
-        context = {'latest_blog_posts': latest_blog_posts}
+        context={'latest_blog_posts':latest_blog_posts}
         return render(request, 'blog/admin.html', context)
     else:
         return HttpResponseForbidden()
@@ -61,9 +61,13 @@ def editPost(request, article_id):
     if request.user.is_superuser:
         try:
             article = Article.objects.get(pk=article_id)
+            comments = article.comment_set.all().order_by('date')
         except Article.DoesNotExist:
             raise Http404("Arr, cap'n, that booty be nowhere.")
-        context = {'article': article}
+        context = {
+            'article': article,
+            'comments': comments,
+        }
         return render(request, 'blog/editPost.html', context)
     else:
         return HttpResponseForbidden()

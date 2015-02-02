@@ -62,6 +62,7 @@ function submitComment(){
     <h2>Comments</h2>
     {% for c in comments %}
             <h3>{{c.author}}</h3>
+            <p>{{c.quest}}</p>
             <p>{{c.message}}
             </p>
     {% endfor %}

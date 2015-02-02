@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^api/comment/(?P<id>[0-9]+)$', apiviews.comment),
     url(r'^api/articles/$', apiviews.articles),
     url(r'^api/comment/$', apiviews.addComment),    # "But I could probably write a script that would flood it, right ?" yes.
+    url(r'^api/comment/delete$', apiviews.removeComment),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -44,6 +44,13 @@ def addComment(request, format=None):
         return Response(status=status.HTTP_404_NOT_FOUND)
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['POST'])
+def removeComment(request, format=None):
+    print >>sys.stderr, request.user.is_superuser
+    comment = get_object_or_404(Comment, pk=request.POST['comment_id'])
+    comment.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
 @api_view(['GET'])
 def comment(request, id, format=None):
     p = get_object_or_404(Article, pk=id)
