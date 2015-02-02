@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     #url(r'^admin/delete$', views.deletePost, name='deletePost'), # Deprecated
     #url(r'^api/', include(router.urls)),
     url(r'^api/articles/(?P<id>[0-9]+)$', apiviews.article_detail),
+    url(r'^api/comment/(?P<id>[0-9]+)$', apiviews.comment),
     url(r'^api/articles/$', apiviews.articles),
     url(r'^api/comment/$', apiviews.addComment),    # "But I could probably write a script that would flood it, right ?" yes.
 )

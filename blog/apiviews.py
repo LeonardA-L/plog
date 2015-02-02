@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 
 from blog.models import *
-from blog.apimodels import ArticleSerializer
+from blog.apimodels import ArticleSerializer, CommentSerializer
 from blog.tools import *
 
 @api_view(['GET', 'POST'])
@@ -40,6 +40,12 @@ def addComment(request, format=None):
     except KeyError:
         return Response(status=status.HTTP_404_NOT_FOUND)
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET'])
+def comment(request, id, format=None):
+    p = get_object_or_404(Article, pk=id)
+    serializer = CommentSerializer(p.comment_set.all(), many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def articles(request):
