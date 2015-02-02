@@ -1,5 +1,10 @@
-<html>
-<head>
+{% extends "blog/common.html" %}
+
+{% block pagetitle %}
+{{article.title}}
+{% endblock %}
+
+{% block additional %}
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
@@ -22,18 +27,18 @@ function addComment(post_id, name, quest, color, message){
         url: "/blog/api/comment/",
         type: 'POST',
         data: {
-        	'csrfmiddlewaretoken':'{{csrf_token}}',
-        	'post_id':post_id,
-        	'name':name,
-        	'quest':quest,
-        	'color':color,
-        	'message':message
+            'csrfmiddlewaretoken':'{{csrf_token}}',
+            'post_id':post_id,
+            'name':name,
+            'quest':quest,
+            'color':color,
+            'message':message
         },
         dataType:"json",
         success: function( data ) {
             setTimeout(function(){
-            	// I could probably just reload the part where the comments are
-            	// Actually that would have been the whole point of using Ajax.
+                // I could probably just reload the part where the comments are
+                // Actually that would have been the whole point of using Ajax.
                 location.reload();
             }, 200);    // Let's wait for the server to be finished with the transaction. Arbitrary 200ms
         }
@@ -41,37 +46,36 @@ function addComment(post_id, name, quest, color, message){
 };
 
 function submitComment(){
-	console.log("adding")
-	// well I guess I could check if those are empty or SQL stuff or anything.
-	addComment( {{ article.id }}, $("#nameF").val(), $("#questF").val(), "#00DD00", $("#messageF").val());
+    console.log("adding")
+    // well I guess I could check if those are empty or SQL stuff or anything.
+    addComment( {{ article.id }}, $("#nameF").val(), $("#questF").val(), "#00DD00", $("#messageF").val());
 };
 
 </script>
+{% endblock %}
 
-</head><body>
+{% block content %}
+    <h1>{{article.title}}</h1>
+    <p>Published on {{article.date}}</p>
+    <p>{{article.content}}</p>
 
-<h1>{{article.title}}</h1>
-<p>Published on {{article.date}}</p>
-<p>{{article.content}}</p>
+    <h2>Comments</h2>
+    {% for c in comments %}
+            <h3>{{c.author}}</h3>
+            <p>{{c.message}}
+            </p>
+    {% endfor %}
 
-<h2>Comments</h2>
-{% for c in comments %}
-        <h3>{{c.author}}</h3>
-        <p>{{c.message}}
-        </p>
-{% endfor %}
+    {% if article.commentable %}
+    <h2>Leave a comment</h2>
 
-{% if article.commentable %}
-<h2>Leave a comment</h2>
-
-What is yer name ? <input type="text" name="name" id="nameF" /><br />
-What is yer quest ? <input type="text" name="quest" id="questF" /><br />
-What is ya favorite colour ? <br />
-Message : <br />
-<textarea name="message" id="messageF"></textarea><br />
-<button onclick="submitComment()">Submit</button>
-
-</body></html>
-{% else %}
-This post doesn't allow comments (anymore).
-{% endif %}
+    What is yer name ? <input type="text" name="name" id="nameF" /><br />
+    What is yer quest ? <input type="text" name="quest" id="questF" /><br />
+    What is ya favorite colour ? <br />
+    Message : <br />
+    <textarea name="message" id="messageF"></textarea><br />
+    <button onclick="submitComment()">Submit</button>
+    {% else %}
+    This post doesn't allow comments (anymore).
+    {% endif %}
+{% endblock %}

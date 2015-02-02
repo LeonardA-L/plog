@@ -1,6 +1,9 @@
-<html>
-<head>
+{% extends "blog/common.html" %}
+{% block pagetitle %}
+Admin Page
+{% endblock %}
 
+{% block additional %}
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -32,26 +35,27 @@ function removePost(post_id){
 }
 
 </script>
-</head><body>
+{% endblock %}
+
+{% block content %}
 <h1>Yissss, admin page</h1>
 <a href="{% url 'blog:addPost' %}">Write a new entry</a>
 {% if latest_blog_posts %}
     <table border="1">
-    	<tr>
-    		<td>Post</td>
-    		<td>Published on</td>
-    		<td>Actions</td>
-    	</tr>
-    	{% for post in latest_blog_posts %}<tr>
-    		<td><a href="{% url 'blog:editPost' post.id %}">{{post.title}}</a></td>
-    		<td>{{post.date}}</td>
-    		<td><a href="{% url 'blog:editPost' post.id %}">Edit</a> | 
+        <tr>
+            <td>Post</td>
+            <td>Published on</td>
+            <td>Actions</td>
+        </tr>
+        {% for post in latest_blog_posts %}<tr>
+            <td><a href="{% url 'blog:editPost' post.id %}">{{post.title}}</a></td>
+            <td>{{post.date}}</td>
+            <td><a href="{% url 'blog:editPost' post.id %}">Edit</a> | 
                 <a href="#" onclick="removePost({{post.id}})">Delete</a>
             </td>
-   		</tr>{% endfor %}
+        </tr>{% endfor %}
     </table>
 {% else %}
     <p>No articles at the moment.</p>
 {% endif %}
-</body>
-</html>
+{% endblock %}

@@ -1,26 +1,30 @@
-<html>
-<head>
+{% extends "blog/common.html" %}
+{% block pagetitle %}
+Welcome home
+{% endblock %}
 
+{% block additional %}
 
-</head><body>
-<h1>Hey, it works!</h1>
-{{ csrf_token }}
-{% if totalPages > 1 %}
-Page : 
-{% load blog_tags %}
-{% for i in totalPages %} <a href="{% url 'blog:indexp' i|mult:articlesPerPage i|add:1|mult:articlesPerPage %}">{{forloop.counter}}</a> {% endfor %}
-{% endif %}
-{% if latest_blog_posts %}
-    <ul>
-    {% for post in latest_blog_posts %}
-        <h3>{{post.title}}</h3>
-        <p>{{post.content|truncatechars:300}}<br>
-        <a href="{% url 'blog:detail' post.id %}">I want moar</a>
-        </p>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No articles at the moment.</p>
-{% endif %}
-</body>
-</html>
+{% endblock %}
+
+{% block content %}
+	<h1>Hey, it works!</h1>
+	{{ csrf_token }}
+	{% if totalPages > 1 %}
+	Page : 
+	{% load blog_tags %}
+	{% for i in totalPages %} <a href="{% url 'blog:indexp' i|mult:articlesPerPage i|add:1|mult:articlesPerPage %}">{{forloop.counter}}</a> {% endfor %}
+	{% endif %}
+	{% if latest_blog_posts %}
+	    <ul>
+	    {% for post in latest_blog_posts %}
+	        <h3>{{post.title}}</h3>
+	        <p>{{post.content|truncatechars:300}}<br>
+	        <a href="{% url 'blog:detail' post.id %}">I want moar</a>
+	        </p>
+	    {% endfor %}
+	    </ul>
+	{% else %}
+	    <p>No articles at the moment.</p>
+	{% endif %}
+{% endblock %}

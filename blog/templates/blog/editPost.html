@@ -1,13 +1,25 @@
+{% extends "blog/common.html" %}
+{% block pagetitle %}
+{% if article %} Edit - {{ article.title}} {% else %} Add a post {% endif %}
+{% endblock %}
+
+{% block additional %}
+
+{% endblock %}
+
+{% block content %}
 <h1>{% if article %} Edit - {{ article.title}} {% else %} Add a post {% endif %}</h1>
 
 <form action="{% url 'blog:savePost' %}" method="post">
-{% csrf_token %}
-Title : <input type="text" name="title" value="{{ article.title}}"/><br />
-Content :<br />
-<textarea name="content">{{ article.content }}</textarea><br />
-Date : <input type="text" name="date" value="{% if article %}{{article.date|date:"Y-m-d"}}{% else %}{{date|date:"Y-m-d"}}{% endif %}"/><br />
-<input type="checkbox" name="draft" {% if article.draft %} checked {% endif %}/> Draft<br />
-<input type="checkbox" name="commentable" {% if article.commentable %} checked {% endif %}/> Open Comments
-{% if article %} <input type="hidden" name="article_id" value="{{article.id}}"> {% endif %}	
-<br /><input type="submit" value="Save Entry" />
+	{% csrf_token %}
+	Title : <input type="text" name="title" value="{{ article.title}}"/><br />
+	Content :<br />
+	<textarea name="content">{{ article.content }}</textarea><br />
+	Date : <input type="text" name="date" value="{% if article %}{{article.date|date:"Y-m-d"}}{% else %}{{date|date:"Y-m-d"}}{% endif %}"/><br />
+	<input type="checkbox" name="draft" {% if article.draft %} checked {% endif %}/> Draft<br />
+	<input type="checkbox" name="commentable" {% if article.commentable %} checked {% endif %}/> Open Comments
+	{% if article %} <input type="hidden" name="article_id" value="{{article.id}}"> {% endif %}	
+	<br /><input type="submit" value="Save Entry" />
 </form>
+{% endblock %}
+

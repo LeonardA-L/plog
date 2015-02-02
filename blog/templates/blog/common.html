@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			{% block pagetitle %}
+			{% endblock %} - Plog
+		</title>
+
+		{% block additional %}
+		{% endblock %}
+	</head>
+<body>
+	<div class="menu"><a href="{% url 'blog:index' %}">Home</a> | <a href="{% url 'blog:admin' %}">Admin</a></div>
+	<div class="content">
+		{% block content %}
+
+		{% endblock %}
+	</div>
+</body>
+</html>
