@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     #url(r'^api/', include(router.urls)),
     url(r'^api/articles/(?P<id>[0-9]+)$', apiviews.article_detail),
     url(r'^api/articles/$', apiviews.articles),
+    url(r'^api/comment/$', apiviews.addComment),    # "But I could probably write a script that would flood it, right ?" yes.
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)
