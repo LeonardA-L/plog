@@ -13,7 +13,7 @@ def index(request, start, end):
     latest_blog_posts = retrieveArticles(limit=-1, drafts=False, future=False)
 
     articlesPerPage = 10
-    totalPages = len(latest_blog_posts)/articlesPerPage +1
+    totalPages = (len(latest_blog_posts) -1)/articlesPerPage +1
     end = len(latest_blog_posts) if end == -1 else end
     latest_blog_posts = latest_blog_posts[int(start):int(end)]
     
