@@ -5,7 +5,7 @@
 Title : <input type="text" name="title" value="{{ article.title}}"/><br />
 Content :<br />
 <textarea name="content">{{ article.content }}</textarea><br />
-Date : <input type="text" name="date" value="{% if article %} {{article.date|date:"Y-m-d"}} {% else %} {{date|date:"Y-m-d"}} {% endif %}"/><br />
+Date : <input type="text" name="date" value="{% if article %}{{article.date|date:"Y-m-d"}}{% else %}{{date|date:"Y-m-d"}}{% endif %}"/><br />
 Draft : <input type="checkbox" name="draft" {% if article.draft %} value="checked" {% endif %}/>
 {% if article %} <input type="hidden" name="article_id" value="{{article.id}}"> {% endif %}	
 <br /><input type="submit" value="Save Entry" />

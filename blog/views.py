@@ -9,8 +9,10 @@ from django.utils.dateparse import parse_date
 from blog.models import Article
 from blog.tools import *
 
-def index(request):
-    latest_blog_posts = retrieveArticles(limit=10, drafts=False, future=False) 
+def index(request, start, end):
+    latest_blog_posts = retrieveArticles(limit=-1, drafts=False, future=False) 
+    end = len(latest_blog_posts) if end == -1 else end
+    latest_blog_posts = latest_blog_posts[start:end]
     context = {'latest_blog_posts': latest_blog_posts}
     return render(request, 'blog/index.html', context)
 

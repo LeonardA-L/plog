@@ -14,7 +14,8 @@ router.register(r'(?P<article_id>\d+)/article', ArticleViewSet)
 """
 
 urlpatterns = patterns('',
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.index, {'start':0, 'end':-1}, name='index'),
+    url(r'^(?P<start>\d+)/(?P<end>\d+)/$', views.index, name='index'),
     url(r'^(?P<article_id>\d+)/$', views.detail, name='detail'),
     url(r'^admin/$', views.admin, name='admin'),
     url(r'^admin/add$', views.addPost, name='addPost'),
