@@ -35,9 +35,10 @@ $.ajaxSetup({
 });
 
 $.ajax({
-	url: "http://127.0.0.1:8000/blog/api/articles/5302669702856704",
+	url: "/blog/api/articles/5021194726146048",
     type: 'POST',
 	data: {'csrfmiddlewaretoken':'{{csrf_token}}'},
+    dataType:"json",
 	success: function( data ) {
 		console.log(data);
 	}

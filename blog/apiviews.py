@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from blog.models import Article
 from blog.apimodels import ArticleSerializer
 
-@api_view(['GET', 'DELETE'])
+@api_view(['GET', 'POST'])
 @csrf_exempt
 def article_detail(request, id, format=None):
     """
