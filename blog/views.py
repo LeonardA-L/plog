@@ -30,7 +30,7 @@ def index(request, start, end):
 def detail(request, article_id):
     try:
         article = Article.objects.get(pk=article_id)
-        comments = article.comment_set.all()
+        comments = article.comment_set.all().order_by('date')
     except Article.DoesNotExist:
         raise Http404("Oh noes, your princess is in an other castle.")
     context = {

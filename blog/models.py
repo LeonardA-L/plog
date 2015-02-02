@@ -6,7 +6,7 @@ from datetime import datetime
 class Article(models.Model):
     title = models.CharField(max_length=250)
     content = models.TextField()
-    date = models.DateField(default=datetime.now)
+    date = models.DateTimeField(default=datetime.now)
     draft = models.BooleanField()
     commentable = models.BooleanField()
     def __str__(self):              # __unicode__ on Python 2
