@@ -10,7 +10,13 @@
     	{% for post in latest_blog_posts %}<tr>
     		<td><a href="{% url 'blog:editPost' post.id %}">{{post.title}}</a></td>
     		<td>{{post.date}}</td>
-    		<td><a href="{% url 'blog:editPost' post.id %}">Edit</a> | Delete</td>
+    		<td><a href="{% url 'blog:editPost' post.id %}">Edit</a> | 
+                <form action="{% url 'blog:deletePost' %}" method="post">   
+                    {% csrf_token %}
+                    <input type="hidden" name="article_id" value="{{post.id}}" />
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
    		</tr>{% endfor %}
     </table>
 {% else %}

@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader
 from django.utils.dateparse import parse_date
 
+
 from blog.models import Article
 
 def index(request):
@@ -53,4 +54,9 @@ def savePost(request):
     else:
     	p = Article(title=request.POST['title'], content=request.POST['content'], draft=draft, date = parse_date(request.POST['date']))
     p.save()
+    return HttpResponseRedirect(reverse('blog:admin'))
+
+def deletePost(request):
+    p = get_object_or_404(Article, id=request.POST['article_id'])
+    p.delete()    
     return HttpResponseRedirect(reverse('blog:admin'))

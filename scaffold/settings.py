@@ -14,7 +14,6 @@ from djangae.settings_base import * #Set up some AppEngine specific stuff
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -106,17 +105,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+STATIC_ROOT = BASE_DIR + '/static'
 STATIC_URL = '/static/'
 
 if DEBUG:
-    CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
+    #CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
+    CSP_STYLE_SRC = ("'none'",)
+    CSP_DEFAULT_SRC = ("'self'", "'unsafe-inline'", "ajax.googleapis.com")
 
 from djangae.contrib.gauth.settings import *
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.AllowAny'
     ]
 }

@@ -8,10 +8,10 @@ from blog.models import Article
 class ArticleSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Article
-        fields = ('title', 'content')
+        fields = ('title', 'content', 'id')
 
 # ViewSets define the view behavior.
-class ArticleViewSet(viewsets.ModelViewSet):
+class ArticlesViewSet(viewsets.ModelViewSet):
 	latest_blog_posts = Article.objects.filter(date__lte = datetime.today())
 	latest_blog_posts = latest_blog_posts.filter(draft = False)
 	latest_blog_posts = latest_blog_posts.order_by('-date')
