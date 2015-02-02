@@ -61,6 +61,7 @@ function submitComment(){
         </p>
 {% endfor %}
 
+{% if article.commentable %}
 <h2>Leave a comment</h2>
 
 What is yer name ? <input type="text" name="name" id="nameF" /><br />
@@ -71,3 +72,6 @@ Message : <br />
 <button onclick="submitComment()">Submit</button>
 
 </body></html>
+{% else %}
+This post doesn't allow comments (anymore).
+{% endif %}

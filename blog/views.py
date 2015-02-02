@@ -60,7 +60,8 @@ def editPost(request, article_id):
 
 def savePost(request):
     #request.POST['choice']
-    draft= True if (request.POST.get('draft', False)=="checked") else False
+    draft= True if (request.POST.get('draft', False)=="on" or request.POST.get('draft', False)=="checked") else False
+    commentable= True if (request.POST.get('commentable', False)=="on" or request.POST.get('commentable', False)=="checked") else False
     article_id = request.POST.get('article_id', False)
     if article_id:
     	p = get_object_or_404(Article, pk=article_id)
@@ -68,8 +69,9 @@ def savePost(request):
     	p.content=request.POST['content']
     	p.draft=draft
     	p.date = parse_date(request.POST['date'])
+        p.commentable = commentable
     else:
-    	p = Article(title=request.POST['title'], content=request.POST['content'], draft=draft, date = parse_date(request.POST['date']))
+    	p = Article(title=request.POST['title'], content=request.POST['content'], draft=draft, date = parse_date(request.POST['date']), commentable=commentable)
     p.save()
     return HttpResponseRedirect(reverse('blog:admin'))
 

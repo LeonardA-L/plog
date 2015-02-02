@@ -8,6 +8,7 @@ class Article(models.Model):
     content = models.TextField()
     date = models.DateField(default=datetime.now)
     draft = models.BooleanField()
+    commentable = models.BooleanField()
     def __str__(self):              # __unicode__ on Python 2
         return self.title
 

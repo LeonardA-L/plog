@@ -35,7 +35,8 @@ def addComment(request, format=None):
         color=request.POST['color']
         message=request.POST['message']
         p = get_object_or_404(Article, pk=request.POST['post_id'])
-        comment = p.comment_set.create(author=name,quest=quest,color=color,message=message)
+        if p.commentable:
+            comment = p.comment_set.create(author=name,quest=quest,color=color,message=message)
     except KeyError:
         return Response(status=status.HTTP_404_NOT_FOUND)
     return Response(status=status.HTTP_204_NO_CONTENT)
