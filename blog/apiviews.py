@@ -21,8 +21,11 @@ def article_detail(request, id, format=None):
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
     elif request.method == 'POST':
-        article.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if request.user.is_superuser:
+            article.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return HttpResponseForbidden()
 
 @api_view(['POST'])
 def addComment(request, format=None):
