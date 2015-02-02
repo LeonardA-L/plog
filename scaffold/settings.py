@@ -111,7 +111,7 @@ STATIC_URL = '/static/'
 if DEBUG:
     #CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
     CSP_STYLE_SRC = ("'none'",)
-    CSP_DEFAULT_SRC = ("'self'", "'unsafe-inline'", "ajax.googleapis.com")
+    CSP_DEFAULT_SRC = ("'self'", "'unsafe-inline'")
 
 from djangae.contrib.gauth.settings import *
 

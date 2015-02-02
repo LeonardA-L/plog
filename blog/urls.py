@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, url, include
 from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
+from django.conf import settings
+from django.conf.urls.static import static
 
 from blog import views, apiviews
 from blog.models import Article
@@ -29,4 +31,4 @@ urlpatterns = patterns('',
     url(r'^api/comment/$', apiviews.addComment),    # "But I could probably write a script that would flood it, right ?" yes.
 )
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns = format_suffix_patterns(urlpatterns)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
