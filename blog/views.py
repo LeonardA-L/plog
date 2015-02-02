@@ -4,16 +4,27 @@ from django.http import Http404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.template import RequestContext, loader
 from django.utils.dateparse import parse_date
-
+import math
 
 from blog.models import Article
 from blog.tools import *
 
 def index(request, start, end):
-    latest_blog_posts = retrieveArticles(limit=-1, drafts=False, future=False) 
+    latest_blog_posts = retrieveArticles(limit=-1, drafts=False, future=False)
+
+    articlesPerPage = 10
+    totalPages = math.ceil(len(latest_blog_posts)/articlesPerPage)
     end = len(latest_blog_posts) if end == -1 else end
-    latest_blog_posts = latest_blog_posts[start:end]
-    context = {'latest_blog_posts': latest_blog_posts}
+    latest_blog_posts = latest_blog_posts[int(start):int(end)]
+    
+    currentPage = int(start)/articlesPerPage
+
+    context = {
+        'latest_blog_posts': latest_blog_posts,
+        'articlesPerPage':articlesPerPage,
+        'totalPages':range(int(totalPages)),
+        'currentPage':currentPage,
+    }
     return render(request, 'blog/index.html', context)
 
 def detail(request, article_id):

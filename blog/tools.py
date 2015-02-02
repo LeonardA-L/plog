@@ -12,3 +12,4 @@ def retrieveArticles(limit, drafts, future):
     if limit>0:
         latest_blog_posts = latest_blog_posts[:limit]
     return latest_blog_posts
+
