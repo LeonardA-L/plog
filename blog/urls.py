@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^admin/add$', views.addPost, name='addPost'),
     url(r'^admin/(?P<article_id>\d+)/$', views.editPost, name='editPost'),
     url(r'^admin/savePost$', views.savePost, name='savePost'),
-    url(r'^admin/delete$', views.deletePost, name='deletePost'),
+    #url(r'^admin/delete$', views.deletePost, name='deletePost'), # Deprecated
     #url(r'^api/', include(router.urls)),
     url(r'^api/articles/(?P<id>[0-9]+)$', apiviews.article_detail),
     url(r'^api/articles/$', apiviews.articles),

@@ -69,7 +69,10 @@ def savePost(request):
     p.save()
     return HttpResponseRedirect(reverse('blog:admin'))
 
+# Deprecated, HA!
+"""
 def deletePost(request):
     p = get_object_or_404(Article, id=request.POST['article_id'])
     p.delete()    
     return HttpResponseRedirect(reverse('blog:admin'))
+"""

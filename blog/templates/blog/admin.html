@@ -4,33 +4,15 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <script type="text/javascript">
-console.log('ok');
-// using jQuery
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-var csrftoken = getCookie('csrftoken');
 
 function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
+
 $.ajaxSetup({
     beforeSend: function(xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            xhr.setRequestHeader("X-CSRFToken", "{{csrftoken}}");
         }
     }
 });
@@ -42,7 +24,9 @@ function removePost(post_id){
         data: {'csrfmiddlewaretoken':'{{csrf_token}}'},
         dataType:"json",
         success: function( data ) {
-            //location.reload(); // That doesn't work (the server is not finished yet)
+            setTimeout(function(){
+                location.reload();
+            }, 200);    // Let's wait for the server to be finished with the transaction. Arbitrary 200ms
         }
     });
 }
@@ -62,7 +46,7 @@ function removePost(post_id){
     		<td><a href="{% url 'blog:editPost' post.id %}">{{post.title}}</a></td>
     		<td>{{post.date}}</td>
     		<td><a href="{% url 'blog:editPost' post.id %}">Edit</a> | 
-                <a href="" onclick="removePost({{post.id}})">Delete</a>
+                <a href="#" onclick="removePost({{post.id}})">Delete</a>
             </td>
    		</tr>{% endfor %}
     </table>
