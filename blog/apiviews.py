@@ -16,16 +16,15 @@ def article_detail(request, id, format=None):
         article = Article.objects.get(id=id)
     except Article.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-
     if request.method == 'GET':
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
-
     elif request.method == 'POST':
         article.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-"""
 @api_view(['GET'])
 def articles(request):
-"""
+    latest_blog_posts = retrieveArticles(limit=-1, drafts=False, future=False)
+    serializer = ArticleSerializer(latest_blog_posts, many=True)
+    return Response(serializer.data)

@@ -23,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^admin/delete$', views.deletePost, name='deletePost'),
     #url(r'^api/', include(router.urls)),
     url(r'^api/articles/(?P<id>[0-9]+)$', apiviews.article_detail),
+    url(r'^api/articles/$', apiviews.articles),
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)

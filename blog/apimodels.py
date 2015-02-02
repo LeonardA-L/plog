@@ -13,9 +13,4 @@ class ArticleSerializer(serializers.HyperlinkedModelSerializer):
 
 # ViewSets define the view behavior.
 class ArticlesViewSet(viewsets.ModelViewSet):
-	#latest_blog_posts = Article.objects.filter(date__lte = datetime.today())
-	#latest_blog_posts = latest_blog_posts.filter(draft = False)
-	#latest_blog_posts = latest_blog_posts.order_by('-date')
-	latest_blog_posts = retrieveArticles(limit=-1, drafts=False, future=False)
-	queryset = latest_blog_posts
-	serializer_class = ArticleSerializer
+    serializer_class = ArticleSerializer
