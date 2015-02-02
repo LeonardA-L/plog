@@ -13,7 +13,7 @@ def index(request, start, end):
     latest_blog_posts = retrieveArticles(limit=-1, drafts=False, future=False)
 
     articlesPerPage = 10
-    totalPages = math.ceil(len(latest_blog_posts)/articlesPerPage)
+    totalPages = len(latest_blog_posts)/articlesPerPage +1
     end = len(latest_blog_posts) if end == -1 else end
     latest_blog_posts = latest_blog_posts[int(start):int(end)]
     
@@ -24,6 +24,7 @@ def index(request, start, end):
         'articlesPerPage':articlesPerPage,
         'totalPages':range(int(totalPages)),
         'currentPage':currentPage,
+        'maximumPage':totalPages,
     }
     return render(request, 'blog/index.html', context)
 

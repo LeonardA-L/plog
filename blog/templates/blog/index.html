@@ -8,13 +8,16 @@ Welcome home
 {% endblock %}
 
 {% block content %}
-	<h1>Hey, it works!</h1>
-	{{ csrf_token }}
-	{% if totalPages > 1 %}
-	Page : 
-	{% load blog_tags %}
-	{% for i in totalPages %} <a href="{% url 'blog:indexp' i|mult:articlesPerPage i|add:1|mult:articlesPerPage %}">{{forloop.counter}}</a> {% endfor %}
-	{% endif %}
+	<h1>Latest articles</h1>
+	<div class="pagination">
+		{% if maximumPage > 1 %}
+		{% load blog_tags %}
+		Page :
+		{% if currentPage > 0 %}<a class="pageLink" href="{% url 'blog:indexp' currentPage|sub:1|mult:articlesPerPage currentPage|mult:articlesPerPage %}"><</a>{% endif %}
+		{% for i in totalPages %} <a class="pageLink {% if currentPage == i %}currentPageLink{% endif %}" href="{% url 'blog:indexp' i|mult:articlesPerPage i|add:1|mult:articlesPerPage %}">{{forloop.counter}}</a> {% endfor %}
+		{% if currentPage < maximumPage|sub:1 %}<a class="pageLink" href="{% url 'blog:indexp' currentPage|add:1|mult:articlesPerPage currentPage|add:2|mult:articlesPerPage %}">></a>{% endif %}
+		{% endif %}
+	</div>
 	{% if latest_blog_posts %}
 	    <ul>
 	    {% for post in latest_blog_posts %}
