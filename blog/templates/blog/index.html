@@ -23,7 +23,7 @@ Welcome home
 	{% if latest_blog_posts %}
 	    {% for post in latest_blog_posts %}
 	        <h3 class="p_title">{{post.title}}</h3>
-	        <div class="p_cont">{{post.content|truncatechars:300}}</div>
+	        <div class="p_cont">{{post.content|truncatechars:300|stripjs}}</div>
 	        <div class="p_sub"><p class="p_date">Published on {{post.date}}</p><a class="get_more" href="{% url 'blog:detail' post.id %}">I want moar</a></div>
 	    {% endfor %}
 	{% else %}
