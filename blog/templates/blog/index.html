@@ -22,9 +22,11 @@ Welcome home
     <div class="latest_blog_posts">
 	{% if latest_blog_posts %}
 	    {% for post in latest_blog_posts %}
+            <div class="post_wrap">
 	        <h3 class="p_title">{{post.title}}</h3>
 	        <div class="p_cont">{{post.content|truncatechars:300|stripjs}}</div>
 	        <div class="p_sub"><p class="p_date">Published on {{post.date}}</p><a class="get_more" href="{% url 'blog:detail' post.id %}">I want moar</a></div>
+            </div>
 	    {% endfor %}
 	{% else %}
 	    <p>No articles at the moment.</p>

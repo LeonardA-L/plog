@@ -1,5 +1,62 @@
 /*  --- So style, much CSS, very design, wow --- */
+div{
+    /*border:solid 1px;*/
+}
+/* General Div placement and size */
+body{
+    background:#EAEAFF;
+    padding:0;
+    margin:0;
+
+    font-family: Calibri, "Trebuchet MS", Arial;
+}
+
+.page{
+    margin:0 auto;
+    width:70%;
+}
+
+/* Index latest entries list */
+
+.post_wrap{
+}
+
+.p_sub{
+    color:#667;
+    height:30px;
+}
+
+.p_sub .p_date, .p_sub .get_more{
+    display:inline-block;
+    height:30px;
+    padding-top:0;
+    margin-top:0;
+}
+
+.get_more{
+    float:right;
+}
+
+.p_title{
+    margin:5px 0;
+}
 
 .menu{
 
+}
+
+/* Separate pages */
+
+.a_complete, .comments_wrap, .lc_wrap, .post_wrap{
+    padding:10px;
+    background:#FFF;
+    margin-bottom:10px;
+}
+
+.a_cont, .c_message, .p_cont{
+    text-align:justify;
+}
+
+.a_sub{
+    text-align:right;
 }
