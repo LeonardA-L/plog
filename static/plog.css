@@ -42,9 +42,13 @@ body{
 }
 
 .menu{
-
+    text-align:center;
+    margin-top:5px;
 }
 
+h1{
+    margin-top:10px;
+}
 /* Separate pages */
 
 .a_complete, .comments_wrap, .lc_wrap, .post_wrap{
