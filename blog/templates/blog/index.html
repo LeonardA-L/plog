@@ -9,25 +9,25 @@ Welcome home
 
 {% block content %}
 	<h1>Latest articles</h1>
-	<div class="pagination">
+	<div class="pagination_wrap">
 		{% if maximumPage > 1 %}
 		{% load blog_tags %}
-		Page :
+		<p class="pagination">Page :
 		{% if currentPage > 0 %}<a class="pageLink" href="{% url 'blog:indexp' currentPage|sub:1|mult:articlesPerPage currentPage|mult:articlesPerPage %}"><</a>{% endif %}
 		{% for i in totalPages %} <a class="pageLink {% if currentPage == i %}currentPageLink{% endif %}" href="{% url 'blog:indexp' i|mult:articlesPerPage i|add:1|mult:articlesPerPage %}">{{forloop.counter}}</a> {% endfor %}
 		{% if currentPage < maximumPage|sub:1 %}<a class="pageLink" href="{% url 'blog:indexp' currentPage|add:1|mult:articlesPerPage currentPage|add:2|mult:articlesPerPage %}">></a>{% endif %}
+        </p>
 		{% endif %}
 	</div>
+    <div class="latest_blog_posts">
 	{% if latest_blog_posts %}
-	    <ul>
 	    {% for post in latest_blog_posts %}
-	        <h3>{{post.title}}</h3>
-	        <p>{{post.content|truncatechars:300}}<br>
-	        <a href="{% url 'blog:detail' post.id %}">I want moar</a>
-	        </p>
+	        <h3 class="p_title">{{post.title}}</h3>
+	        <p class="p_cont">{{post.content|truncatechars:300}}</p>
+	        <div class="p_sub"><p class="p_date">Published on {{post.date}}</p><a class="get_more" href="{% url 'blog:detail' post.id %}">I want moar</a></div>
 	    {% endfor %}
-	    </ul>
 	{% else %}
 	    <p>No articles at the moment.</p>
 	{% endif %}
+    </div>
 {% endblock %}
