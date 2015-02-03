@@ -23,3 +23,11 @@ class ArticleTests(TestCase):
 		contained = p in lbp
 		p.delete()
 		self.assertEqual(contained, False)
+
+	def test_todays_article_will_be_public(self):
+		p = Article(title='test', content='test', draft=False, date = datetime.today(), commentable=True)
+		p.save()
+		lbp = retrieveArticles(limit=-1, drafts=False, future=False)
+		contained = p in lbp
+		p.delete()
+		self.assertEqual(contained, True)
