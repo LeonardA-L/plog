@@ -55,10 +55,11 @@ function submitComment(){
 {% endblock %}
 
 {% block content %}
+{% load blog_tags %}
 <div class="a_complete">
     <h1 class="a_title">{{article.title}}</h1>
     <p class="a_sub">Published on {{article.date}}</p>
-    <div class="a_cont">{{article.content | safe}}</div>
+    <div class="a_cont">{{article.content | stripjs}}</div>
 </div>
 <div class="comments_wrap">
     <h2>Comments</h2>
