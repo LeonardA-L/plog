@@ -11,8 +11,10 @@ Admin Page
 {% endblock %}
 
 {% block content %}
-<h1>Yissss, admin page</h1>
-<a href="{% url 'blog:addPost' %}">Write a new entry</a>
+<h1>Admin Page</h1>
+<div class="contentDiv">
+<a href="{% url 'blog:addPost' %}">Write a new entry</a> | <a href="#">Do nothing</a>
+</div>
 {% if latest_blog_posts %}
     <table class="contentDiv">
         <thead>
