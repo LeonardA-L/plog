@@ -9,7 +9,7 @@ from blog.apimodels import *
 
 urlpatterns = patterns('',
     # Regular views
-    url(r'^$', views.index, {'start':0, 'end':10}, name='index'),           # Index list
+    url(r'^$', views.index, name='index'),           # Index list
     url(r'^(?P<start>\d+)/(?P<end>\d+)/$', views.index, name='indexp'),     # Index list with specific start:end page params
     url(r'^(?P<article_id>\d+)/$', views.detail, name='detail'),            # Details on an article (full content, comments)
 

@@ -63,6 +63,6 @@ def articles(request):
     Gets all articles
     Note that only the fields 'title', 'content', 'id' will be serialized. See apimodels.py
     """
-    latest_blog_posts = retrieveArticles(limit=-1, drafts=False, future=False)
+    latest_blog_posts = retrieveArticles(drafts=False, future=False)
     serializer = ArticleSerializer(latest_blog_posts, many=True)
     return Response(serializer.data)

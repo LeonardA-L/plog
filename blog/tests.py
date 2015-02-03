@@ -11,7 +11,7 @@ class ArticleTests(TestCase):
 	def test_future_article_will_be_public(self):
 		p = Article(title='test', content='test', draft=False, date = datetime.today() + timedelta(days=30), commentable=True)
 		p.save()
-		lbp = retrieveArticles(limit=-1, drafts=False, future=False)
+		lbp = retrieveArticles(drafts=False, future=False)
 		contained = p in lbp
 		p.delete()
 		self.assertEqual(contained, False)
@@ -19,7 +19,7 @@ class ArticleTests(TestCase):
 	def test_draft_article_will_be_public(self):
 		p = Article(title='test', content='test', draft=True, date = datetime.today() - timedelta(days=30), commentable=True)
 		p.save()
-		lbp = retrieveArticles(limit=-1, drafts=False, future=False)
+		lbp = retrieveArticles(drafts=False, future=False)
 		contained = p in lbp
 		p.delete()
 		self.assertEqual(contained, False)
@@ -27,7 +27,7 @@ class ArticleTests(TestCase):
 	def test_todays_article_will_be_public(self):
 		p = Article(title='test', content='test', draft=False, date = datetime.today(), commentable=True)
 		p.save()
-		lbp = retrieveArticles(limit=-1, drafts=False, future=False)
+		lbp = retrieveArticles(drafts=False, future=False)
 		contained = p in lbp
 		p.delete()
 		self.assertEqual(contained, True)

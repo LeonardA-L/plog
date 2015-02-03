@@ -2,7 +2,7 @@ from datetime import datetime
 
 from blog.models import Article
 
-def retrieveArticles(limit, drafts, future):
+def retrieveArticles(drafts, future, limit=-1):
     """
     Will retrieve and filter articles according to the parameters
     """

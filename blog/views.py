@@ -7,12 +7,12 @@ from django.utils.dateparse import parse_date
 from blog.models import Article
 from blog.tools import *
 
-def index(request, start, end):
+def index(request, start=0, end=10):
     """
     Renders the latest articles on the blog, possibly filtered by page
     """
 
-    latest_blog_posts = retrieveArticles(limit=-1, drafts=False, future=False)      # See tools.py
+    latest_blog_posts = retrieveArticles(drafts=False, future=False)      # See tools.py
 
     # Pagination calculations
     articlesPerPage = 10
@@ -56,7 +56,7 @@ def admin(request):
     """
     if request.user.is_superuser:
         #latest_blog_posts = Article.objects.all().order_by('-date')
-        latest_blog_posts = retrieveArticles(limit=-1, drafts=True, future=True)
+        latest_blog_posts = retrieveArticles(drafts=True, future=True)
         context={'latest_blog_posts':latest_blog_posts}
         return render(request, 'blog/admin.html', context)
     else:
