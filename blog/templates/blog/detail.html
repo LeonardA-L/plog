@@ -55,28 +55,35 @@ function submitComment(){
 {% endblock %}
 
 {% block content %}
-    <h1>{{article.title}}</h1>
-    <p>Published on {{article.date}}</p>
-    <p>{{article.content}}</p>
-
+<div class="a_complete">
+    <h1 class="a_title">{{article.title}}</h1>
+    <p class="a_sub">Published on {{article.date}}</p>
+    <p class="a_cont">{{article.content}}</p>
+</div>
+<div class="comments_wrap">
     <h2>Comments</h2>
-    {% for c in comments %}
-            <h3>{{c.author}}</h3>
-            <p>{{c.quest}}</p>
-            <p>{{c.message}}
-            </p>
-    {% endfor %}
-
+    <div class="comments">
+            {% for c in comments %}
+                    <h3 class="c_author">{{c.author}}</h3>
+                    <p class="c_sub">{{c.quest}}</p>
+                    <p class="c_message">{{c.message}}
+                    </p>
+            {% endfor %}
+    </div>
     {% if article.commentable %}
     <h2>Leave a comment</h2>
-
-    What is yer name ? <input type="text" name="name" id="nameF" /><br />
-    What is yer quest ? <input type="text" name="quest" id="questF" /><br />
-    What is ya favorite colour ? <br />
-    Message : <br />
-    <textarea name="message" id="messageF"></textarea><br />
-    <button onclick="submitComment()">Submit</button>
-    {% else %}
-    This post doesn't allow comments (anymore).
+    <div class="leave_comment">
+            <p>
+            What is yer name ? <input type="text" name="name" id="nameF" /><br />
+            What is yer quest ? <input type="text" name="quest" id="questF" /><br />
+            What is ya favorite colour ? <br />
+            Message : <br />
+            <textarea name="message" id="messageF"></textarea><br />
+            <button onclick="submitComment()">Submit</button>
+            </p>
+            {% else %}
+            <p>This post doesn't allow comments (anymore).</p>
     {% endif %}
+    </div>
+</div>
 {% endblock %}
