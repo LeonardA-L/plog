@@ -67,9 +67,10 @@ function submitComment(){
     <div class="comments">
             {% for c in comments %}
                     <h3 class="c_author">{{c.author}}</h3>
-                    <p class="c_sub">{{c.quest}}</p>
+                    <p class="c_sub">On a quest <span class="c_quest">{{c.quest}}</span> since {{c.date|date:"N jS Y"}}</p>
                     <p class="c_message">{{c.message}}
                     </p>
+            <div class="c_break"></div>
             {% endfor %}
     </div>
 </div>
