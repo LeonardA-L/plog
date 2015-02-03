@@ -7,9 +7,9 @@ class Article(models.Model):
     title = models.CharField(max_length=250)
     content = models.TextField()
     date = models.DateTimeField(default=datetime.now)
-    draft = models.BooleanField()
-    commentable = models.BooleanField()
-    def __str__(self):              # __unicode__ on Python 2
+    draft = models.BooleanField()                       # a draft article won't be publicly visible
+    commentable = models.BooleanField()                 # opens/closes comments on an article
+    def __str__(self):
         return self.title
 
 class Comment(models.Model):
