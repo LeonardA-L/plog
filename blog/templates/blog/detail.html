@@ -48,7 +48,7 @@ function addComment(post_id, name, quest, color, message){
 function submitComment(){
     console.log("adding")
     // well I guess I could check if those are empty or SQL stuff or anything.
-    addComment( {{ article.id }}, $("#nameF").val(), $("#questF").val(), "#00DD00", $("#messageF").val());
+    addComment( {{ article.id }}, $("#nameF").val(), $("#questF").val(), $('input[name=color]:checked').val(), $("#messageF").val());
 };
 
 </script>
@@ -66,11 +66,11 @@ function submitComment(){
     <h2>Comments</h2>
     <div class="comments">
             {% for c in comments %}
-                    <h3 class="c_author">{{c.author}}</h3>
+                    <h3 class="c_author {{c.color}}">{{c.author}}</h3>
                     <p class="c_sub">On a quest <span class="c_quest">{{c.quest}}</span> since {{c.date|date:"N jS Y"}}</p>
                     <p class="c_message">{{c.message}}
                     </p>
-            <div class="c_break"></div>
+            {% if forloop.last == False %}<div class="c_break"></div>{% endif %}
             {% endfor %}
     </div>
 </div>
@@ -81,7 +81,10 @@ function submitComment(){
             <p>
             What is yer name ? <input type="text" name="name" id="nameF" /><br />
             What is yer quest ? <input type="text" name="quest" id="questF" /><br />
-            What is ya favorite colour ? <br />
+            What is ya favorite colour ? 
+            <input type="radio" name="color" value="red"> Red
+            <input type="radio" name="color" value="blue" checked> Blue
+            <br />
             Message : <br />
             <textarea name="message" id="messageF"></textarea><br />
             <button onclick="submitComment()">Submit</button>
