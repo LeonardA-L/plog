@@ -4,7 +4,7 @@ div{
 }
 /* General Div placement and size */
 body{
-    background:#EAEAFF;
+    background:#EBEBFF;
     padding:0;
     margin:0;
 
@@ -51,7 +51,7 @@ h1{
 }
 /* Separate pages */
 
-.a_complete, .comments_wrap, .lc_wrap, .post_wrap{
+.contentDiv{
     padding:10px;
     background:#FFF;
     margin-bottom:10px;
@@ -59,6 +59,11 @@ h1{
 
 .a_cont, .c_message, .p_cont{
     text-align:justify;
+}
+
+.a_cont{
+    padding:30px;
+    padding-top:10px;
 }
 
 .a_sub{
@@ -71,7 +76,7 @@ h1{
     margin-bottom:0;
 }
 
-.c_sub{
+.c_sub, .pro_tip{
     margin:3px 0 6px 0;
     font-size:0.8em;
     color:#667;
@@ -93,4 +98,27 @@ h1{
 
 .blue{
     color:#00A;
+}
+
+/* Forms */
+
+input[type=text]{
+    width:300px;    /* So responsive */
+}
+
+.comment_txtarea{
+    width:440px;
+    height:150px;
+}
+
+.adm_p_title, .adm_txtarea{
+    width:calc(100% - 10px) !important;
+}
+
+.adm_p_title{
+    margin-bottom:20px;
+}
+
+.adm_txtarea{
+    height:520px;
 }

@@ -57,11 +57,12 @@ function submitComment(){
 {% block content %}
 {% load blog_tags %}
 <h1 class="a_title">{{article.title}}</h1>
-<div class="a_complete">
+<div class="contentDiv a_complete">
     <p class="a_sub">Published on {{article.date| date:"N jS Y"}}</p>
     <div class="a_cont">{{article.content | stripjs}}</div>
 </div>
-<div class="comments_wrap">
+{% if comments|length > 0 or article.commentable %}
+<div class="contentDiv comments_wrap">
     <a id="comments" />
     <h2>Comments</h2>
     <div class="comments">
@@ -72,9 +73,13 @@ function submitComment(){
                     </p>
             {% if forloop.last == False %}<div class="c_break"></div>{% endif %}
             {% endfor %}
+            {% if comments|length == 0 %}
+            <p>No comment yet.</p>
+            {% endif %}
     </div>
 </div>
-<div class="lc_wrap">
+{% endif %}
+<div class="contentDiv lc_wrap">
     {% if article.commentable %}
     <h2>Leave a comment</h2>
     <div class="leave_comment">
@@ -84,14 +89,14 @@ function submitComment(){
             What is ya favorite colour ? 
             <input type="radio" name="color" value="red"> Red
             <input type="radio" name="color" value="blue" checked> Blue
-            <br />
-            Message : <br />
-            <textarea name="message" id="messageF"></textarea><br />
+            <br /><br />
+            Message<br />
+            <textarea name="message" id="messageF" class="comment_txtarea"></textarea><br />
             <button onclick="submitComment()">Submit</button>
             </p>
     </div>
     {% else %}
-    <p>Sorry, this post doesn't allow comments (anymore).</p>
+    <p>Sorry, this post doesn't allow comments{% if comments|length > 0 %} anymore{%endif%}.</p>
     {% endif %}
 </div>
 {% endblock %}

@@ -57,25 +57,29 @@ function removeComment(id){
 
 {% block content %}
 <h1>{% if article %} Edit - {{ article.title}} {% else %} Add a post {% endif %}</h1>
-
+<div class="contentDiv">
 <form action="{% url 'blog:savePost' %}" method="post">
 	{% csrf_token %}
-	Title : <input type="text" name="title" value="{{ article.title}}"/><br />
-	Content :<br />
-	<textarea name="content">{{ article.content }}</textarea><br />
+	<input type="text" name="title" value="{{ article.title}}" class="adm_p_title"/ placeholder="Title"><br />
+    <p class="pro_tip">Pro tip : you can use html tags to make your post seem interesting and hide its lack of actual content behind kitten pictures.</p>
+	<textarea name="content" class="adm_txtarea" placeholder="Your blog entry">{{ article.content }}</textarea><br />
+    <p class="pro_tip">Pro tip : you can set a future date for this post to be published.</p>
 	Date : <input type="text" name="date" value="{% if article %}{{article.date|date:"Y-m-d"}}{% else %}{{date|date:"Y-m-d"}}{% endif %}"/><br />
 	<input type="checkbox" name="draft" {% if article.draft %} checked {% endif %}/> Draft<br />
 	<input type="checkbox" name="commentable" {% if article.commentable %} checked {% endif %}/> Open Comments
 	{% if article %} <input type="hidden" name="article_id" value="{{article.id}}"> {% endif %}	
 	<br /><input type="submit" value="Save Entry" />
 </form>
+</div>
 
 <h2>Comments</h2>
-{% for c in comments %}
-            <h3>{{c.author}}</h3>
-            <p>{{c.quest}} | <a href="#" onclick="removeComment({{c.id}})">Delete</a></p>
-            <p>{{c.message}}
-            </p>
-{% endfor %}
+    <div class="contentDiv comments">
+            {% for c in comments %}
+                    <h3 class="c_author {{c.color}}">{{c.author}} | <a href="#" onclick="removeComment({{c.id}})">Delete</a></h3>
+                    <p class="c_sub"><span class="c_quest">{{c.quest}}</span> posted {{c.date|date:"N jS Y"}}</p>
+                    <p class="c_message">{{c.message}}
+                    </p>
+            {% if forloop.last == False %}<div class="c_break"></div>{% endif %}
+            {% endfor %}
+    </div>
 {% endblock %}
-
