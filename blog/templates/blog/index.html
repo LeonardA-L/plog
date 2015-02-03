@@ -9,16 +9,18 @@ Welcome home
 
 {% block content %}
 	<h1>Latest articles</h1>
-	<div class="pagination_wrap">
-		{% if maximumPage > 1 %}
+	{% if maximumPage > 1 %}
+	<div class="contentDiv pagination_wrap">
+		
 		{% load blog_tags %}
 		<p class="pagination">Page :
 		{% if currentPage > 0 %}<a class="pageLink" href="{% url 'blog:indexp' currentPage|sub:1|mult:articlesPerPage currentPage|mult:articlesPerPage %}"><</a>{% endif %}
 		{% for i in totalPages %} <a class="pageLink {% if currentPage == i %}currentPageLink{% endif %}" href="{% url 'blog:indexp' i|mult:articlesPerPage i|add:1|mult:articlesPerPage %}">{{forloop.counter}}</a> {% endfor %}
 		{% if currentPage < maximumPage|sub:1 %}<a class="pageLink" href="{% url 'blog:indexp' currentPage|add:1|mult:articlesPerPage currentPage|add:2|mult:articlesPerPage %}">></a>{% endif %}
         </p>
-		{% endif %}
+		
 	</div>
+	{% endif %}
     <div class="latest_blog_posts">
 	{% if latest_blog_posts %}
 	    {% for post in latest_blog_posts %}

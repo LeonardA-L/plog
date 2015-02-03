@@ -4,54 +4,9 @@
 {% endblock %}
 
 {% block additional %}
-<script type="text/javascript" src="/blog/static/jquery-1.11.2.min.js"></script>
-
-<script type="text/javascript">
-
-function csrfSafeMethod(method) {
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", "{{csrftoken}}");
-        }
-    }
-});
-
-function removePost(post_id){
-    $.ajax({
-        url: "/blog/api/articles/"+post_id,
-        type: 'POST',
-        data: {'csrfmiddlewaretoken':'{{csrf_token}}'},
-        dataType:"json",
-        success: function( data ) {
-            setTimeout(function(){
-                location.reload();
-            }, 200);    // Let's wait for the server to be finished with the transaction. Arbitrary 200ms
-        }
-    });
-}
-
-function removeComment(id){
-    $.ajax({
-        url: "/blog/api/comment/delete",
-        type: 'POST',
-        data: {
-            'csrfmiddlewaretoken':'{{csrf_token}}',
-            'comment_id':id,
-        },
-        dataType:"json",
-        success: function( data ) {
-            setTimeout(function(){
-                location.reload();
-            }, 200);
-        }
-    });
-};
-
-</script>
+<script type="text/javascript" src="/blog/static/js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/blog/static/js/commonajax.js"></script>
+<script type="text/javascript" src="/blog/static/js/editPost.js"></script>
 
 {% endblock %}
 
