@@ -60,8 +60,8 @@ def comment(request, id, format=None):
 @api_view(['GET'])
 def articles(request):
     """
-    Gets all articles
-    Note that only the fields 'title', 'content', 'id' will be serialized. See apimodels.py
+    Gets all the public articles
+    Only public fields will be serialized. See apimodels.py
     """
     latest_blog_posts = retrieveArticles(drafts=False, future=False)
     serializer = ArticleSerializer(latest_blog_posts, many=True)
