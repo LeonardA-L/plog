@@ -55,7 +55,7 @@ MIDDLEWARE_CLASSES = (
     'djangosecure.middleware.SecurityMiddleware',
     'session_csrf.CsrfMiddleware',
 )
-
+"""
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -66,7 +66,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     "session_csrf.context_processor",
 )
-
+"""
 def check_session_csrf_enabled():
     if "session_csrf.CsrfMiddleware" not in MIDDLEWARE_CLASSES:
         return [ "SESSION_CSRF_DISABLED"]
@@ -116,7 +116,7 @@ STATIC_URL = '/static/'
 
 if DEBUG:
     #CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
-    CSP_STYLE_SRC = ("'self'",)
+    CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
     CSP_DEFAULT_SRC = ("'self'", "'unsafe-inline'")
 
 
