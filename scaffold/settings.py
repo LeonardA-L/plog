@@ -22,7 +22,7 @@ from .boot import get_app_config
 SECRET_KEY = get_app_config().secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -53,8 +53,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'csp.middleware.CSPMiddleware',
     'djangosecure.middleware.SecurityMiddleware',
+    'session_csrf.CsrfMiddleware',
 )
-"""
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -65,7 +66,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     "session_csrf.context_processor",
 )
-"""
+
 def check_session_csrf_enabled():
     if "session_csrf.CsrfMiddleware" not in MIDDLEWARE_CLASSES:
         return [ "SESSION_CSRF_DISABLED"]
