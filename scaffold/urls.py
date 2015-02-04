@@ -17,5 +17,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('blog.urls', namespace="blog")),
 
-    url(r'auth/', include('djangae.contrib.gauth.urls')),
+    url(r'^auth/', include('djangae.contrib.gauth.urls')),
 )

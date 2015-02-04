@@ -9,6 +9,7 @@ from blog.apimodels import ArticleSerializer, CommentSerializer
 from blog.tools import *
 import sys
 
+@login_required
 @api_view(['GET', 'POST'])
 def article_detail(request, id, format=None):
     """
@@ -46,10 +47,10 @@ def removeComment(request, format=None):
     """
     Deletes a comment
     """
-    # Hmmm... it seems like rest calls are identified as Anon Users
+    # Hmmm... it seems like REST calls are identified as Anon Users
     print>>sys.stderr, request.user.is_superuser
     comment = get_object_or_404(Comment, pk=request.POST['comment_id'])
-    #comment.delete()
+    comment.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET'])
