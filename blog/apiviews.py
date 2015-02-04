@@ -2,11 +2,12 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from blog.models import *
 from blog.apimodels import ArticleSerializer, CommentSerializer
 from blog.tools import *
-
+import sys
 
 @api_view(['GET', 'POST'])
 def article_detail(request, id, format=None):
@@ -39,13 +40,16 @@ def addComment(request, format=None):
         return Response(status=status.HTTP_404_NOT_FOUND)
     return Response(status=status.HTTP_204_NO_CONTENT)
 
+@login_required
 @api_view(['POST'])
 def removeComment(request, format=None):
     """
     Deletes a comment
     """
+    # Hmmm... it seems like rest calls are identified as Anon Users
+    print>>sys.stderr, request.user.is_superuser
     comment = get_object_or_404(Comment, pk=request.POST['comment_id'])
-    comment.delete()
+    #comment.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET'])
