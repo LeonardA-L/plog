@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^api/comment/$', apiviews.addComment),                            # POSTs a new comment
     url(r'^api/comment/delete$', apiviews.removeComment),                   # POST : deletes a comment
     # Note : this API is UNSAFE (yet) because it cannot check if the AJAX request you made was made by an administrator (yet).
+    
 )
 
 urlpatterns = format_suffix_patterns(urlpatterns)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

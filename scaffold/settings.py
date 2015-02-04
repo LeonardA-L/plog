@@ -113,7 +113,6 @@ if DEBUG:
     CSP_STYLE_SRC = ("'self'",)
     CSP_DEFAULT_SRC = ("'self'", "'unsafe-inline'")
 
-from djangae.contrib.gauth.settings import *
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -123,3 +122,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+
+from djangae.contrib.gauth.settings import *

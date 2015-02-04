@@ -3,6 +3,7 @@ from datetime import datetime
 from django.http import Http404, HttpResponseForbidden, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils.dateparse import parse_date
+from django.contrib.auth.decorators import login_required
 
 from blog.models import Article
 from blog.tools import *
@@ -49,19 +50,21 @@ def detail(request, article_id):
 
 ## Admin related views. Should probably have been put in a separate file
 
+@login_required
 def admin(request):
     """
     Renders the admin index page (lists all articles and offers to delete or edit them)
     Checks if user is admin
     """
     if request.user.is_superuser:
-        #latest_blog_posts = Article.objects.all().order_by('-date')
+        latest_blog_posts = Article.objects.all().order_by('-date')
         latest_blog_posts = retrieveArticles(drafts=True, future=True)
         context={'latest_blog_posts':latest_blog_posts}
         return render(request, 'blog/admin.html', context)
     else:
         return HttpResponseForbidden()
 
+@login_required
 def addPost(request):
     """
     Renders the "Add new entry" page
@@ -72,6 +75,7 @@ def addPost(request):
     else:
         return HttpResponseForbidden()
 
+@login_required
 def editPost(request, article_id):
     """
     Renders the "Add new entry" page with an article as parameter, allowing user to edit it
@@ -91,6 +95,7 @@ def editPost(request, article_id):
     else:
         return HttpResponseForbidden()
 
+@login_required
 def savePost(request):
     """
     Saves a post, new or modified
